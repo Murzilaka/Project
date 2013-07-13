@@ -30,6 +30,9 @@ public class RoomsActivity extends BaseActivity {
 				//Toast.makeText(rooms_activity.this, items[position], Toast.LENGTH_SHORT).show();
 			}
 		});
+	    
+	   
+	    
 	    listview.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
@@ -50,6 +53,13 @@ public class RoomsActivity extends BaseActivity {
 			}
 		    listview.setAdapter(mAdapter);
 	}
+	
+	 @Override
+	 public void onBackPressed(){
+	//	 android.os.Process.killProcess(android.os.Process.myPid());
+		 stopsystem();
+		 super.onBackPressed();
+	 }
 //	public boolean onCreateOptionsMenu(Menu menu){
 //		getMenuInflater().inflate(R.menu.rooms_menu, menu);
 //		return super.onCreateOptionsMenu(menu);
@@ -85,7 +95,7 @@ public class RoomsActivity extends BaseActivity {
 //				if (name==null || name.trim().length()==0){
 //					//ошибка о вводе имени
 //					Toast.makeText(RoomsActivity.this, "Please enter room name",Toast.LENGTH_SHORT).show();
-//				}
+//		}
 //				else{
 //					String desc= ((EditText)view.findViewById(R.id.dialog_rooms_add_description)).getText().toString();
 //					if (desc==null || desc.trim().length()==0){
@@ -106,3 +116,4 @@ public class RoomsActivity extends BaseActivity {
 
 
 }
+
