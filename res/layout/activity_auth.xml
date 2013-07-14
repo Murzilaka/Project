@@ -36,7 +36,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:hint="Enter E-mail"
-           android:text="killer@i.ua"
+           android:text="enykoruna1@gmail.com"
            android:layout_margin="10dp"
            />
        <EditText 
@@ -45,7 +45,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:hint="Enter Password"
-           android:text="1234"
+           android:text="192837"
            android:layout_margin="10dp"
            
            />

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.KPenz.chat.Api.ApiException;
+import com.KPenz.chat.Api.AuthCallback;
 
 
 public class AuthActivity extends BaseActivity {
@@ -33,7 +34,13 @@ public class AuthActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				buttonlog();
+				try {
+					buttonlog();
+				}
+				catch (ApiException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		findViewById(R.id.Registration).setOnClickListener(new OnClickListener() {
@@ -74,19 +81,32 @@ public class AuthActivity extends BaseActivity {
 		        break;
 	    }
 	}
-	public void buttonlog(){
+	public void buttonlog() throws ApiException{
 		EditText email = (EditText) findViewById(R.id.email);
 		EditText pass = (EditText) findViewById(R.id.password);
-		try{
-			mCore.getApi().auth(email.getText().toString(), pass.getText().toString());
-			Toast.makeText(AuthActivity.this, "Welcome!!!", Toast.LENGTH_LONG).show();
-			Intent i = new Intent(this,RoomsActivity.class);
-			startActivity(i);
-			finish();
-		}
-		catch(ApiException e){
-			Toast.makeText(AuthActivity.this, "D'OH!!!", Toast.LENGTH_LONG).show();
-		}
+		
+			mCore.getApi().auth(email.getText().toString(), pass.getText().toString(),new Api.AuthCallback() {
+				
+				@Override
+				public void onAuthCallbackSuccess() {
+					// TODO Auto-generated method stub
+					Toast.makeText(AuthActivity.this, "Welcome!!!", Toast.LENGTH_LONG).show();
+					Intent i = new Intent(AuthActivity.this,RoomsActivity.class);
+					startActivity(i);
+					finish();	
+				}
+				
+				@Override
+				public void onAuthCallbackFailed(String message) {
+					// TODO Auto-generated method stub
+					Toast.makeText(AuthActivity.this, "Не верный пароль", Toast.LENGTH_LONG).show();
+				}
+			});
+			
+		
+		
+			
+		
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
